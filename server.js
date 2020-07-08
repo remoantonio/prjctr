@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const bcrypt = require('bcrypt');
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
 ////////////////////////////////////////////////////////////////
 // Controllers
@@ -63,6 +63,6 @@ app.get('/prjctr', (req, res) => {
 // Listening
 ////////////////////////////////////////////////////////////////
 
-app.listen(port, () => {
-    console.log('listening on port: ', port);
+app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
 });
