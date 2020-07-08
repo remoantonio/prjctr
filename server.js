@@ -54,10 +54,10 @@ db.on('open' , ()=>{ console.log('Ready to go.')});
 ////////////////////////////////////////////////////////////////
 
 app.get('/', (req, res) => {
-    res.send('Hello')
+    res.redirect('/prjctr')
 })
 app.get('/prjctr', (req, res) => {
-    res.send('Hello World')
+    res.send('Redirected from home')
 })
 ////////////////////////////////////////////////////////////////
 // Listening
