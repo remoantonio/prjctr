@@ -34,10 +34,20 @@ app.use('/prjctr/project', projectController)
 // Database
 ////////////////////////////////////////////////////////////////
 
-mongoose.connect('mongodb://localhost:27017/prjctr', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false,});
-mongoose.connection.once('open', () => {
-    console.log('connected to mongo');
-});
+// Define Database connection
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/'+ `prjctr`;
+const db = mongoose.connection;
+
+// Connect to Database
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false,});
+
+// Error/Success
+db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
+db.on('connected', () => console.log('mongo connected: ', MONGODB_URI));
+db.on('disconnected', () => console.log('mongo disconnected'));
+
+// Open Connection
+db.on('open' , ()=>{ console.log('Ready to go.')});
 
 ////////////////////////////////////////////////////////////////
 // Routes
