@@ -43,6 +43,9 @@ mongoose.connection.once('open', () => {
 // Routes
 ////////////////////////////////////////////////////////////////
 
+app.get('/', (req, res) => {
+    res.redirect('/prjctr')
+})
 app.get('/prjctr', (req, res) => {
     res.send('Hello World')
 })
