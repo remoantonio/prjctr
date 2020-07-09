@@ -1,0 +1,28 @@
+<form action="/" method="post">
+    <input type="text" name="projectName" class="form-control"
+    <% if (edit) { %>
+        value="<%=project.projectName%>"
+    <% } %>
+    >
+    <Label for="projectName" class="form-label">Project Name</Label>
+    <textarea name="description" class="form-control"
+    <% if (edit) { %>
+        value="<%=project.description%>"
+    <% } %>
+    >
+    </textarea>
+    <label for="description" class="form-label">Description</label>
+    <input type="date" name="dueDate" class="form-control"
+    <% if (edit) { %>
+        value="<%=project.dueDate%>"
+    <% } %>
+    >
+    <label for="dueDate" class="form-label">Due Date</label>
+    <input type="submit" class="button" 
+    <% if (edit) { %>
+        value="Edit Project"
+    <% } else {%>
+        value="Create Project"
+    <% } %>
+    >
+</form>

@@ -12,9 +12,15 @@ const Project = require('../models/projectModel')
 ////////////////////////////////////////////////////////////////
 
 // index
-router.get('/new', (req, res) => {
-    res.send('working')
+router.get('/', (req, res) => {
+    res.send('Here is the index')
 })
 
-
+// new
+router.get('/new', (req, res) => {
+    res.render('../views/project/newProject.ejs', {
+        edit: false,
+        tabTitle: 'Create New Project'
+    })
+})
 module.exports = router
