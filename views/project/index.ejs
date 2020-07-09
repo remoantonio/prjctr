@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ('../partials/site/head.ejs') %>
+</head>
+<body>
+    <% listProjects.forEach(element => { %>
+        <a href="/prjctr/project/<%= element.id %> ">
+            <h2><%= element.projectName %> </h2>
+        </a>
+    <% }) %>
+</body>
+</html>

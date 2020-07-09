@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ('../partials/site/head.ejs') %>
+</head>
+<body>
+    <h1><%= currentProject.projectName %> </h1>
+    <h2>
+        Due Date: <%
+        if (currentProject.dueDate) {
+            shortDate = moment(currentProject.dueDate).format('dddd, MMMM Do, YYYY')
+        } else {
+            shortDate = 'Not Set.'
+        }
+        %>
+        <%= shortDate %> 
+    </h2>
+    <h2>
+        Days from now: <%
+        countDown = moment(currentProject.dueDate).format('YYYYMMDD')
+        countDown = moment(countDown).fromNow()
+        %> 
+        <%= countDown %>
+    </h2>
+    <h3>Status: <% if(currentProject.complete) { %>
+        Completed
+    <%} else { %>
+        Incomplete
+    <% } %>
+    </h3>
+    <p>
+        <%= currentProject.description %> 
+    </p>
+    <h3?>
+        Current Tasks:
+    </h3>
+    <% if (currentProject.tasks.length == 0) { %>
+        <p>
+            No tasks assigned.
+        </p>
+    <% } %>
+    <ul>
+        <% currentProject.tasks.forEach(element => { %>
+            <li>
+                <%= element.task %> 
+                <%= element.complete %> 
+            </li>
+        <% }) %>
+    </ul>
+    <%- include ('../partials/project/taskForm.ejs') %>
+</body>
+</html>
