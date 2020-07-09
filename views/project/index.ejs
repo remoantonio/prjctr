@@ -4,6 +4,7 @@
     <%- include ('../partials/site/head.ejs') %>
 </head>
 <body>
+    <%- include ('../partials/site/nav.ejs') %>
     <% listProjects.forEach(element => { %>
         <a href="/prjctr/project/<%= element.id %> ">
             <h2><%= element.projectName %> </h2>
