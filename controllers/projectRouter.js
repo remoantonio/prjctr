@@ -16,7 +16,16 @@ router.get('/', (req, res) => {
     res.send('Here is the index')
 })
 
-// new
+// create
+router.post('/', (req, res) => {
+    console.log(req.body)
+    Project.create(req.body, (err, project) => {
+        if (err){console.log(err)}
+        console.log(project)
+    })
+    res.redirect('/')
+})
+// new project
 router.get('/new', (req, res) => {
     res.render('../views/project/newProject.ejs', {
         edit: false,

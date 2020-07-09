@@ -17,7 +17,7 @@ const projectController = require('./controllers/projectRouter.js')
 ////////////////////////////////////////////////////////////////
 
 // app middleware
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'))
 app.use(methodOverride('_method'))

@@ -1,7 +1,7 @@
-<form action="/" method="post">
-    <input type="text" name="projectName" class="form-control"
+<form action="/prjctr/project/" method="post">
+    <input type="text" name="name" class="form-control"
     <% if (edit) { %>
-        value="<%=project.projectName%>"
+        value="<%=project.name%>"
     <% } %>
     >
     <Label for="projectName" class="form-label">Project Name</Label>
@@ -9,8 +9,7 @@
     <% if (edit) { %>
         value="<%=project.description%>"
     <% } %>
-    >
-    </textarea>
+    ></textarea>
     <label for="description" class="form-label">Description</label>
     <input type="date" name="dueDate" class="form-control"
     <% if (edit) { %>
