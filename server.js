@@ -57,7 +57,9 @@ app.get('/', (req, res) => {
     res.redirect('/prjctr')
 })
 app.get('/prjctr', (req, res) => {
-    res.send('Redirected from home')
+    res.render('./user/home.ejs', {
+        tabTitle : 'Home'
+    })
 })
 ////////////////////////////////////////////////////////////////
 // Listening
