@@ -7,6 +7,7 @@
     <%- include ('../partials/site/nav.ejs') %>
     <h1><%= currentProject.projectName %> </h1>
     <%- include ('../partials/project/projDelete.ejs') %>
+    <a href="/prjctr/project/<%= currentProject.id%>/edit">Edit Project</a>
     <h2>
         Due Date: <%
         if (currentProject.dueDate) {
@@ -44,15 +45,32 @@
     <ul>
         <% currentProject.tasks.forEach(element => { %>
             <li>
-                <%= element.task %> 
-                <%= element.complete %>
-                <form action="/prjctr/project/task/<%=currentProject.id%>/<%=element.id%>?_method=delete" method="post">
-                    <input type="hidden" name="taskID" value="<%=element.id%>">
-                    <input type="submit" value="Delete Task" class="button" id="taskDeleteButton">
-                </form>
+                <% if (edit) { %>
+                    <% if (currentTask == element.id) { %>
+                        <!-- Edit Task Form -->
+                            <form action="/prjctr/project/task/<%=currentProject.id%>/  <%=element.id%>?_method=put" method="post">
+                                <input type="text" name="task" class="form-control" value="<%=element.task%>">
+                                <input type="submit" value="Save" class="button" id="taskDeleteButton">
+                            </form>
+                    <% } else { %>
+                        <%= element.task %> 
+                        <%= element.complete %>
+                    <% } %>
+                <% } else { %>
+                    <%= element.task %> 
+                    <%= element.complete %>
+                <!-- Delete Task Button-->
+                    <form action="/prjctr/project/task/<%=currentProject.id%>/<%=element.id%>?_method=delete" method="post">
+                        <input type="submit" value="Delete Task" class="button" id="taskDeleteButton">
+                    </form>
+                <!-- Edit Task Button-->
+                    <a href="/prjctr/project/task/<%=currentProject.id%>/<%=element.id%>">Edit Task</a>
+                    <% } %>
             </li>
         <% }) %>
     </ul>
-    <%- include ('../partials/project/taskForm.ejs') %>
+    <% if (edit == false) { %>
+        <%- include ('../partials/project/taskForm.ejs') %>
+    <% } %>
 </body>
 </html>
