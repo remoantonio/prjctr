@@ -6,6 +6,7 @@
 <body>
     <%- include ('../partials/site/nav.ejs') %>
     <h1><%= currentProject.projectName %> </h1>
+    <%- include ('../partials/project/projDelete.ejs') %>
     <h2>
         Due Date: <%
         if (currentProject.dueDate) {
@@ -44,10 +45,14 @@
         <% currentProject.tasks.forEach(element => { %>
             <li>
                 <%= element.task %> 
-                <%= element.complete %> 
+                <%= element.complete %>
+                <form action="/prjctr/project/<%=element.task.id%>?_method=put" method="post">
+                    <input type="submit" value="Delete Project" class="button" id="deleteButton">
+                </form>
             </li>
         <% }) %>
     </ul>
     <%- include ('../partials/project/taskForm.ejs') %>
+    <% console.log(currentProject.tasks[0].id)%>
 </body>
 </html>

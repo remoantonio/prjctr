@@ -5,10 +5,13 @@
 </head>
 <body>
     <%- include ('../partials/site/nav.ejs') %>
-    <% listProjects.forEach(element => { %>
+    <% currentProject.forEach(element => { %>
         <a href="/prjctr/project/<%= element.id %> ">
-            <h2><%= element.projectName %> </h2>
+            <%= element.projectName %>
         </a>
+        <form action="/prjctr/project/<%=element.id%>?_method=delete" method="post">
+            <input type="submit" value="Delete Project" class="button" id="deleteButton">
+        </form>
     <% }) %>
 </body>
 </html>

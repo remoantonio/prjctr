@@ -1,19 +1,15 @@
-<form action="/prjctr/project/" method="post">
+<form action="<%=actionForm%>" method="post">
     <input type="text" name="projectName" class="form-control"
     <% if (edit) { %>
-        value="<%=project.projectName%>"
+        value="<%=currentProject.projectName%>"
     <% } %>
     >
     <Label for="projectName" class="form-label">Project Name</Label>
-    <textarea name="description" class="form-control"
-    <% if (edit) { %>
-        value="<%=project.description%>"
-    <% } %>
-    ></textarea>
+    <textarea name="description" class="form-control"><% if (edit) { %><%=currentProject.description%><% } %></textarea>
     <label for="description" class="form-label">Description</label>
     <input type="date" name="dueDate" class="form-control"
     <% if (edit) { %>
-        value="<%=project.dueDate%>"
+        value="<%= moment(currentProject.dueDate).format('YYYY-MM-DD') %>"
     <% } %>
     >
     <label for="dueDate" class="form-label">Due Date</label>
