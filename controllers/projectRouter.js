@@ -83,6 +83,20 @@ router.delete('/task/:id/:task', (req, res) => {
     })
 })
 
+// complete project
+router.put('/complete/:id', (req, res) => {
+    // console.log(req.body)
+    // console.log(req.params)
+    Project.findById(req.params.id, (err, project) => {
+        if (err) {console.log(err)}
+        project.complete = true
+        Project.findByIdAndUpdate(req.params.id, project, {new: true}, (err, project) => {
+            if (err) {console.log(err)}
+            res.redirect('/prjctr/project/' + project.id)
+        })
+    })
+})
+
 // update project
 router.put('/:id', (req, res) => {
     console.log('update route')
@@ -101,6 +115,31 @@ router.get('/:id/edit', (req, res) => {
             edit : true,
             moment : moment,
             actionForm: '/prjctr/project/' + project.id + '?_method=Put',
+        })
+    })
+})
+
+// complete task
+router.put('/task/complete/:id/:task', (req, res) => {
+    // console.log(req.body)
+    // console.log(req.params)
+    Project.findById(req.params.id, (err, project) => {
+        if (err) {console.log(err)}
+        let holder =[]
+        // console.log("project testing",project)
+        for (let i = 0; i < project.tasks.length; i++) {
+            if (project.tasks[i].id == req.params.task.replace(/ /g, '')) {
+                project.tasks[i].complete = true
+                holder.push(project.tasks[i])
+            } else {
+                holder.push(project.tasks[i]);
+            }
+        }
+        // console.log(project.tasks[0].id)
+        console.log("testing",holder)
+        Project.findByIdAndUpdate(req.params.id, {$set: {tasks : holder}}, {new: true}, (err, project) => {
+            if (err) {console.log(err)}
+            res.redirect('/prjctr/project/' + project.id)
         })
     })
 })

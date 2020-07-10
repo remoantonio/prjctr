@@ -25,12 +25,17 @@
         %> 
         <%= countDown %>
     </h2>
+    <!-- Project Status -->
     <h3>Status: <% if(currentProject.complete) { %>
         Completed
     <%} else { %>
         Incomplete
     <% } %>
     </h3>
+    <!-- Update Project Status -->
+    <form action="/prjctr/project/complete/<%=currentProject.id%>?_method=put" method="post">
+        <input type='submit' value='Complete'>
+    </form>
     <p>
         <%= currentProject.description %> 
     </p>
@@ -50,15 +55,28 @@
                         <!-- Edit Task Form -->
                             <form action="/prjctr/project/task/<%=currentProject.id%>/  <%=element.id%>?_method=put" method="post">
                                 <input type="text" name="task" class="form-control" value="<%=element.task%>">
-                                <input type="submit" value="Save" class="button" id="taskDeleteButton">
+                                <input type="submit" value="Save" class="button">
                             </form>
+                            <a href="/prjctr/project/<%=currentProject.id%>">Cancel</a>
                     <% } else { %>
                         <%= element.task %> 
-                        <%= element.complete %>
+                        <% if (element.complete) { %>
+                            Complete
+                        <% } else { %>
+                            Incomplete
+                        <% } %>
                     <% } %>
                 <% } else { %>
                     <%= element.task %> 
-                    <%= element.complete %>
+                    <% if (element.complete) { %>
+                        Complete
+                    <% } else { %>
+                        Incomplete
+                    <% } %>
+                    <!-- Complete Task Button -->
+                    <form action="/prjctr/project/task/complete/<%=currentProject.id%>/  <%=element.id%>?_method=put" method="post">
+                        <input type="submit" value="Complete" class="button">
+                    </form>
                 <!-- Delete Task Button-->
                     <form action="/prjctr/project/task/<%=currentProject.id%>/<%=element.id%>?_method=delete" method="post">
                         <input type="submit" value="Delete Task" class="button" id="taskDeleteButton">
