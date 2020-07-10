@@ -46,13 +46,13 @@
             <li>
                 <%= element.task %> 
                 <%= element.complete %>
-                <form action="/prjctr/project/<%=element.task.id%>?_method=put" method="post">
-                    <input type="submit" value="Delete Project" class="button" id="deleteButton">
+                <form action="/prjctr/project/task/<%=currentProject.id%>/<%=element.id%>?_method=delete" method="post">
+                    <input type="hidden" name="taskID" value="<%=element.id%>">
+                    <input type="submit" value="Delete Task" class="button" id="taskDeleteButton">
                 </form>
             </li>
         <% }) %>
     </ul>
     <%- include ('../partials/project/taskForm.ejs') %>
-    <% console.log(currentProject.tasks[0].id)%>
 </body>
 </html>

@@ -58,13 +58,33 @@ router.post('/task/:id', (req, res) => {
     console.log(req.params.id)
     Project.findByIdAndUpdate(req.params.id, {$push : {tasks: req.body}}, {new : true}, (err, project) => {
         if (err) {console.log(err)}
-        console.log(project)
+        // console.log(project)
         res.redirect('/prjctr/project/' + project.id)
     })
 })
 
+// delete task
+router.delete('/task/:id/:task', (req, res) => {
+    // console.log(req.body.taskID)
+    Project.findById(req.params.id, (err, project) => {
+        if (err) {console.log(err)}
+        let holder =[]
+        for (let i = 0; i < project.tasks.length; i++) {
+            if (project.tasks[i].id != req.body.taskID) {
+                holder.push(project.tasks[i])
+            }
+        }
+        // console.log(project.tasks[0].id)
+        // console.log(holder)
+        Project.findByIdAndUpdate(req.params.id, {$set: {tasks : holder}}, {new: true}, (err, project) => {
+            if (err) {console.log(err)}
+            res.redirect('/prjctr/project/' + project.id)
+        })
+    })
+})
 // update
 router.put('/:id', (req, res) => {
+    console.log('update route')
     Project.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, project) => {
         if (err) {console.log(err)}
         res.redirect('/prjctr/project/' + project.id)
