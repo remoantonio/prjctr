@@ -1,0 +1,12 @@
+<form action="/prjctr/user/new" method="post">
+    <input type="text" name="userName" class="form-control">
+    <label for="userName" class="form-label">User Name</label>
+    <input type="password" name="password" class="form-control">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" name="password2" class="form-control">
+    <label for="password2" class="form-label">Verify Password</label>
+    <% if (match == 'false') { %>
+        <p>Passwords do not match.</p>
+    <% } %>
+    <input type='submit' class='w3-button w3-blue w3-hover-red w3-round-large w3-small sideBySide'>
+</form>
