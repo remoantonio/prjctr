@@ -16,10 +16,11 @@ const Project = require('../models/projectModel')
 
 // index
 router.get('/', (req, res) => {
-    // console.log(currentUser)
+    console.log(currentUser)
+    // console.log(currentUser.projects[0])
     Project.find({'_id' : {$in :currentUser.projects}}, (err, projects) => {
         if (err) {console.log(err)}
-        console.log('checking projects',projects)
+        // console.log('checking projects',projects)
         // res.send('found projects')
         res.render('../views/project/index.ejs', {
             currentProject: projects,
@@ -43,7 +44,19 @@ router.get('/', (req, res) => {
 router.delete('/:id', (req, res) => {
     Project.findByIdAndDelete(req.params.id, (err, projects) => {
         if (err) {console.log(err)}
-        res.redirect('/prjctr/project')
+        let holder= []
+        for (let i = 0; i < currentUser.projects.length; i++) {
+            if (projects.id == currentUser.projects[i]) {
+            } else {
+                holder.push(currentUser.projects[i])
+            }
+        }
+        currentUser.projects = holder
+        console.log('testing removing project',currentUser.projects)
+        User.findOneAndUpdate({userName : currentUser.userName}, currentUser, {new: true}, (err, user) => {
+            if (err) {console.log(err)}
+            res.redirect('/prjctr/project')
+        })
     })
 })
 
@@ -52,15 +65,16 @@ router.delete('/:id', (req, res) => {
 router.post('/', (req, res) => {
     // console.log(req.body)
     // console.log('project create', currentUser)
-    console.log('NEW PROJECT SECTION?????????????????????????????')
+    // console.log('NEW PROJECT SECTION?????????????????????????????')
     Project.create(req.body, (err, project) => {
         if (err){console.log(err)}
         // console.log(project)
-        console.log('outside function',currentUser)
-        User.findOneAndUpdate({userName : currentUser.userName}, {$push : {projects : project.id}}, (err, user) => {
+        // console.log('outside function',currentUser)
+        User.findOneAndUpdate({userName : currentUser.userName}, {$push : {projects : project.id}}, {new: true}, (err, user) => {
             if (err){console.log(err)}
-            console.log('inside function',user)
-            res.redirect('/prjctr/project/')
+            // console.log('inside function',user)
+            req.session.currentUser = user
+            res.redirect('/prjctr/project/' + project.id)
         })
         // User.findByIdAndUpdate(currentUser.id, {$push : { projects : project.id}}, (err, user) => {
         //     if (err){console.log(err)}
