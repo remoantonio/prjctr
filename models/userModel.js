@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const userSchema = new mongoose.Schema({
     userName: {type: String, unique: true, required: true},
     password: {type: String, required:true},
-    projects: [{projectID: String}]
+    projects: [{type: String}]
 })
 
 const User = mongoose.model('User', userSchema)

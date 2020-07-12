@@ -33,6 +33,7 @@ function loginCheck(req, res, next) {
     if (!req.session.currentUser) {
         res.redirect('/prjctr/user/required')
     } else {
+        currentUser = req.session.currentUser
         next()
     }
 }
@@ -69,7 +70,7 @@ app.get('/', (req, res) => {
     res.redirect('/prjctr')
 })
 app.get('/prjctr', (req, res) => {
-    console.log('homepage',req.session.currentUser)
+    // console.log('homepage',req.session.currentUser)
     res.render('./user/home.ejs', {
         tabTitle : 'Home'
     })

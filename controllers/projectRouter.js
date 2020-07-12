@@ -1,11 +1,13 @@
 const express = require('express')
 const router = express.Router()
 const moment = require('moment')
+const mongoose = require('mongoose')
 
 ////////////////////////////////////////////////////////////////
 // Models
 ////////////////////////////////////////////////////////////////
 
+const User = require('../models/userModel')
 const Project = require('../models/projectModel')
 
 ////////////////////////////////////////////////////////////////
@@ -14,15 +16,28 @@ const Project = require('../models/projectModel')
 
 // index
 router.get('/', (req, res) => {
-    Project.find({}, (err, projects) => {
+    // console.log(currentUser)
+    Project.find({'_id' : {$in :currentUser.projects}}, (err, projects) => {
         if (err) {console.log(err)}
-        // console.log(projects)
+        console.log('checking projects',projects)
+        // res.send('found projects')
         res.render('../views/project/index.ejs', {
             currentProject: projects,
             tabTitle: 'Project List'
         })
     })
 })
+// router.get('/', (req, res) => {
+//     console.log(currentUser)
+//     Project.find({}, (err, projects) => {
+//         if (err) {console.log(err)}
+//         // console.log(projects)
+//         res.render('../views/project/index.ejs', {
+//             currentProject: projects,
+//             tabTitle: 'Project List'
+//         })
+//     })
+// })
 
 // delete project
 router.delete('/:id', (req, res) => {
@@ -35,12 +50,24 @@ router.delete('/:id', (req, res) => {
 
 // create project
 router.post('/', (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
+    // console.log('project create', currentUser)
+    console.log('NEW PROJECT SECTION?????????????????????????????')
     Project.create(req.body, (err, project) => {
         if (err){console.log(err)}
-        console.log(project)
+        // console.log(project)
+        console.log('outside function',currentUser)
+        User.findOneAndUpdate({userName : currentUser.userName}, {$push : {projects : project.id}}, (err, user) => {
+            if (err){console.log(err)}
+            console.log('inside function',user)
+            res.redirect('/prjctr/project/')
+        })
+        // User.findByIdAndUpdate(currentUser.id, {$push : { projects : project.id}}, (err, user) => {
+        //     if (err){console.log(err)}
+        //     console.log('inside function',user)
+        //     res.redirect('/prjctr/project/')
+        // })
     })
-    res.redirect('/prjctr/project')
 })
 
 // new project
