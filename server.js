@@ -57,6 +57,7 @@ app.get('/', (req, res) => {
     res.redirect('/prjctr')
 })
 app.get('/prjctr', (req, res) => {
+    console.log('homepage',req.session.currentUser)
     res.render('./user/home.ejs', {
         tabTitle : 'Home'
     })
