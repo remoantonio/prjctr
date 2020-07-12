@@ -14,6 +14,14 @@ const Project = require('../models/projectModel')
 // Routes
 ////////////////////////////////////////////////////////////////
 
+// login or signup splash
+router.get('/required', (req, res) => {
+    res.render('../views/user/userArea.ejs', {
+        tabTitle: 'User Area'
+    })
+})
+
+// delete user session
 router.delete('/logout', (req, res) => {
     req.session.destroy(() => {
         res.redirect('/')

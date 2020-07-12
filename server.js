@@ -3,6 +3,7 @@ const session = require('express-session')
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const bcrypt = require('bcrypt');
+require('dotenv').config()
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -22,10 +23,21 @@ app.use(express.json());
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
 app.use(session({
-    secret: "feedmeseymour", //some random string
+    secret: process.env.SECRET, //some random string
     resave: false,
     saveUninitialized: false
 }));
+
+// login authentication function and middleware
+function loginCheck(req, res, next) {
+    if (!req.session.currentUser) {
+        res.redirect('/prjctr/user/required')
+    } else {
+        next()
+    }
+}
+app.use('/prjctr/project', loginCheck)
+
 // controller  middleware
 app.use('/prjctr/user', userController)
 app.use('/prjctr/project', projectController)
