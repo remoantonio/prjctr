@@ -14,6 +14,10 @@ const Project = require('../models/projectModel')
 // Routes
 ////////////////////////////////////////////////////////////////
 
+// login user
+router.get('/login', (req, res) => {
+    
+})
 // create user
 router.post('/new', (req, res) => {
     // console.log(req)
