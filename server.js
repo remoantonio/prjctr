@@ -3,6 +3,8 @@ const session = require('express-session')
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const bcrypt = require('bcrypt');
+const favicon = require('serve-favicon')
+const path = require('path')
 require('dotenv').config()
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,15 +20,19 @@ const projectController = require('./controllers/projectRouter.js')
 ////////////////////////////////////////////////////////////////
 
 // app middleware
+// app.use( favicon(path.join(__dirname, 'public', 'favicon.ico')) );
+// app.use( favicon (__dirname + '/public/favicon.ico'))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
+
 app.use(session({
     secret: process.env.SECRET, //some random string
     resave: false,
     saveUninitialized: false
 }));
+
 
 // login authentication function and middleware
 function loginCheck(req, res, next) {

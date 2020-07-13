@@ -95,8 +95,8 @@ router.get('/new', (req, res) => {
 
 // new task
 router.post('/task/:id', (req, res) => {
-    console.log(req.body)
-    console.log(req.params.id)
+    // console.log(req.body)
+    // console.log(req.params.id)
     Project.findByIdAndUpdate(req.params.id, {$push : {tasks: req.body}}, {new : true}, (err, project) => {
         if (err) {console.log(err)}
         // console.log(project)
@@ -106,7 +106,6 @@ router.post('/task/:id', (req, res) => {
 
 // delete task
 router.delete('/task/:id/:task', (req, res) => {
-    console.log(req.params)
     Project.findById(req.params.id, (err, project) => {
         if (err) {console.log(err)}
         let holder =[]
@@ -115,8 +114,6 @@ router.delete('/task/:id/:task', (req, res) => {
                 holder.push(project.tasks[i])
             }
         }
-        // console.log(project.tasks[0].id)
-        // console.log(holder)
         Project.findByIdAndUpdate(req.params.id, {$set: {tasks : holder}}, {new: true}, (err, project) => {
             if (err) {console.log(err)}
             res.redirect('/prjctr/project/' + project.id)
@@ -126,8 +123,6 @@ router.delete('/task/:id/:task', (req, res) => {
 
 // complete project
 router.put('/complete/:id', (req, res) => {
-    // console.log(req.body)
-    // console.log(req.params)
     Project.findById(req.params.id, (err, project) => {
         if (err) {console.log(err)}
         project.complete = true
@@ -162,8 +157,6 @@ router.get('/:id/edit', (req, res) => {
 
 // complete task
 router.put('/task/complete/:id/:task', (req, res) => {
-    // console.log(req.body)
-    // console.log(req.params)
     Project.findById(req.params.id, (err, project) => {
         if (err) {console.log(err)}
         let holder =[]
@@ -177,7 +170,6 @@ router.put('/task/complete/:id/:task', (req, res) => {
             }
         }
         // console.log(project.tasks[0].id)
-        console.log("testing",holder)
         Project.findByIdAndUpdate(req.params.id, {$set: {tasks : holder}}, {new: true}, (err, project) => {
             if (err) {console.log(err)}
             res.redirect('/prjctr/project/' + project.id)
