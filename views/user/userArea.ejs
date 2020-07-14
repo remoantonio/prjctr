@@ -4,11 +4,13 @@
     <%- include ('../partials/site/head.ejs') %>
 </head>
 <body>
-    <div>
+    <div class="w3-center">
         <%- include ('../partials/site/nav.ejs') %>
-        <h2>This is a user page. Please login or sign-up. Thank you!</h2>
-        <a href="/prjctr/user/new">Sign-up</a>
-        <a href="/prjctr/user/login">Login</a>
+        <h2 id="userArea">This is a user page. Please login or sign-up. Thank you!</h2>
+        <div class="sideBySide">
+            <a href="/prjctr/user/new" class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide'>Sign-up</a>
+            <a href="/prjctr/user/login" class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide'>Login</a>
+        </div>
     </div>
 </body>
 </html>

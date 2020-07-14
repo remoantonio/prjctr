@@ -168,3 +168,27 @@ a {
     color: #1AFFD5 !important;
     background-color: #590925 !important;
 }
+
+@media only screen and (max-width: 600px) {
+    .title {
+        font-size: 15vh;
+    }
+    .nav-link {
+        width: 60vw
+    }
+    .nav-links {
+        font-size: 4vh;
+    }
+    .middle {
+        width: 90vw;
+    }
+    .dates > h2 {
+        font-size:4vh;
+    }
+    .status > h3 {
+        font-size:4vh;
+    }
+    #userArea {
+        font-size:4vh;
+    }
+}
