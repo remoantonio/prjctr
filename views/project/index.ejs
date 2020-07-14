@@ -4,18 +4,22 @@
     <%- include ('../partials/site/head.ejs') %>
 </head>
 <body>
-    <div>
+    <div id = 'index-container'>
         <%- include ('../partials/site/nav.ejs') %>
         <% currentProject.forEach(element => { %>
-            <div class="project-index">
-                <a href="/prjctr/project/<%= element.id %> ">
-                    <%= element.projectName %>
-                </a>
-                <form action="/prjctr/project/<%=element.id%>?_method=delete" method="post">
-                    <input type="submit" value="Delete Project" class="w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide" id="deleteButton">
-                </form>
-                <% }) %>
+            <a href="/prjctr/project/<%= element.id %> ">
+            <div class="project-index w3-card-2 proj-card">
+                <div class='project-title'>
+                        <%= element.projectName %>
+                </div>
+                <div>
+                    <form action="/prjctr/project/<%=element.id%>?_method=delete" method="post">
+                        <input type="submit" value="Delete Project" class="w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide" id="deleteButton">
+                    </form>
+                </div>
             </div>
+            </a>
+                <% }) %>
     </div>
 </body>
 </html>

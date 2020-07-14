@@ -1,23 +1,33 @@
-<form action="<%=actionForm%>" method="post">
-    <input type="text" name="projectName" class="form-control"
-    <% if (edit) { %>
-        value="<%=currentProject.projectName%>"
-    <% } %>
-    >
-    <Label for="projectName" class="form-label">Project Name</Label>
-    <textarea name="description" class="form-control"><% if (edit) { %><%=currentProject.description%><% } %></textarea>
-    <label for="description" class="form-label">Description</label>
-    <input type="date" name="dueDate" class="form-control"
-    <% if (edit) { %>
-        value="<%= moment(currentProject.dueDate).format('YYYY-MM-DD') %>"
-    <% } %>
-    >
-    <label for="dueDate" class="form-label">Due Date</label>
-    <input type="submit" class="button" 
-    <% if (edit) { %>
-        value="Edit Project"
-    <% } else {%>
-        value="Create Project"
-    <% } %>
-    >
+<form action="<%=actionForm%>" method="post" class="w3-container">
+    <div class='form'>
+        <h1 class="subtitle">
+            <%= tabTitle%>
+        </h1>
+        <div class="form-limit">
+            <input type="text" name="projectName" class="w3-input w3-border w3-round"
+            <% if (edit) { %>
+                value="<%=currentProject.projectName%>"
+            <% } %>
+            >
+            <Label for="projectName" class="form-label">Project Name</Label>
+            <textarea name="description" class="w3-input w3-border w3-round"><% if (edit) { %><%=currentProject.description%><% } %></textarea>
+            <label for="description" class="form-label">Description</label>
+
+            <div class="stacked">
+                <input type="date" name="dueDate" class="form-control"
+                <% if (edit) { %>
+                    value="<%= moment(currentProject.dueDate).format('YYYY-MM-DD') %>"
+                <% } %>
+                >
+                <label for="dueDate" class="form-label">Due Date</label>
+            </div>
+            <input type="submit" class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small' 
+            <% if (edit) { %>
+                value="Edit Project"
+            <% } else {%>
+                value="Create Project"
+            <% } %>
+            >
+        </div>
+    </div>
 </form>

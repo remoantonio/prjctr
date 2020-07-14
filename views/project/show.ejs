@@ -4,45 +4,55 @@
     <%- include ('../partials/site/head.ejs') %>
 </head>
 <body>
-    <div>
+    <div class="show-div">
         <%- include ('../partials/site/nav.ejs') %>
         <h1><%= currentProject.projectName %> </h1>
         <div class="sideBySide">
             <%- include ('../partials/project/projDelete.ejs') %>
             <a href="/prjctr/project/<%= currentProject.id%>/edit" class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide'>Edit Project</a>
         </div>
-        <h2>
-            Due Date: <%
-            if (currentProject.dueDate) {
-                shortDate = moment(currentProject.dueDate).format('dddd, MMMM Do, YYYY')
-            } else {
-                shortDate = 'Not Set.'
-            }
-            %>
-            <%= shortDate %> 
-        </h2>
-        <h2>
-            Days from now: <%
-            countDown = moment(currentProject.dueDate).format('YYYYMMDD')
-            countDown = moment(countDown).fromNow()
-            %> 
-            <%= countDown %>
-        </h2>
-        <!-- Project Status -->
-        <h3>Status: <% if(currentProject.complete) { %>
-            Completed
-        <%} else { %>
-            Incomplete
-        <% } %>
-        </h3>
-        <!-- Update Project Status -->
-        <form action="/prjctr/project/complete/<%=currentProject.id%>?_method=put" method="post">
-            <input type='submit' value='Complete' class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide'>
-        </form>
-        <p>
-            <%= currentProject.description %> 
-        </p>
-        <h3?>
+        <div class="middle">
+            <div class='dates'>
+                <h2>
+                    Due Date: <%
+                    if (currentProject.dueDate) {
+                        shortDate = moment(currentProject.dueDate).format('MMMM Do, YYYY')
+                    } else {
+                        shortDate = 'Not Set.'
+                    }
+                    %>
+                    <%= shortDate %> 
+                </h2>
+                <h2>
+                    Days from now: <%
+                    countDown = moment(currentProject.dueDate).format('YYYYMMDD')
+                    countDown = moment(countDown).fromNow()
+                    %> 
+                    <%= countDown %>
+                </h2>
+            </div>
+            <div class='status'>
+                <!-- Project Status -->
+                <h3>Status: <% if(currentProject.complete) { %>
+                    <span id='complete'>
+                        Completed
+                    </span>
+                <%} else { %>
+                    <span id='incomplete'>
+                        Incomplete
+                    </span>
+                <% } %>
+                </h3>
+                <!-- Update Project Status -->
+                <form action="/prjctr/project/complete/<%=currentProject.id%>?_method=put" method="post">
+                    <input type='submit' value='Complete' class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide'>
+                </form>
+                <p>
+                    <%= currentProject.description %> 
+                </p>
+            </div>
+        </div>
+        <h3>
             Current Tasks:
         </h3>
         <% if (currentProject.tasks.length == 0) { %>
@@ -51,46 +61,66 @@
             </p>
         <% } %>
         <ul>
-            <% currentProject.tasks.forEach(element => { %>
-                <li>
-                    <div class='sideBySide'>
-                        <% if (edit) { %>
-                            <% if (currentTask == element.id) { %>
-                                <!-- Edit Task Form -->
-                                    <form action="/prjctr/project/task/<%=currentProject.id%>/  <%=element.id%>?_method=put" method="post">
-                                        <input type="text" name="task" class="form-control" value="<%=element.task%>">
-                                        <input type="submit" value="Save" class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide space'>
-                                    </form>
-                                    <a href="/prjctr/project/<%=currentProject.id%>" class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide space'>Cancel</a>
-                            <% } else { %>
-                                <%= element.task %> 
-                                <% if (element.complete) { %>
-                                    Complete
+            <div id="card-task">
+                <% currentProject.tasks.forEach(element => { %>
+                    <div class="w3-card-2 each-card">
+                        <li>
+                            <div class='sideBySide'>
+                                <% if (edit) { %>
+                                    <% if (currentTask == element.id) { %>
+                                        <!-- Edit Task Form -->
+                                            <form action="/prjctr/project/task/<%=currentProject.id%>/  <%=element.id%>?_method=put" method="post">
+                                                <input type="text" name="task" class="form-control" value="<%=element.task%>">
+                                                <div class="task-edit">
+                                                    <input type="submit" value="Save" class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide space'>
+                                                </form>
+                                                <a href="/prjctr/project/<%=currentProject.id%>" class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide space'>Cancel</a>
+                                                </div>
+                                    <% } else { %>
+                                        <div class='task-edit2'>
+                                            <%= element.task %> 
+                                            <% if (element.complete) { %>
+                                                <span id='complete'>
+                                                    Completed
+                                                </span>
+                                            <% } else { %>
+                                                <span id='incomplete'>
+                                                    Incomplete
+                                                </span>
+                                            <% } %>
+                                        </div>
+                                    <% } %>
                                 <% } else { %>
-                                    Incomplete
-                                <% } %>
-                            <% } %>
-                        <% } else { %>
-                            <%= element.task %> 
-                            <% if (element.complete) { %>
-                                Complete
-                            <% } else { %>
-                                Incomplete
-                            <% } %>
-                            <!-- Complete Task Button -->
-                            <form action="/prjctr/project/task/complete/<%=currentProject.id%>/  <%=element.id%>?_method=put" method="post">
-                                <input type="submit" value="Complete" class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide space'>
-                            </form>
-                        <!-- Delete Task Button-->
-                            <form action="/prjctr/project/task/<%=currentProject.id%>/<%=element.id%>?_method=delete" method="post">
-                                <input type="submit" value="Delete Task"  class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide space' id="taskDeleteButton">
-                            </form>
-                        <!-- Edit Task Button-->
-                            <a href="/prjctr/project/task/<%=currentProject.id%>/<%=element.id%>" class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide space'>Edit Task</a>
-                            <% } %>
+                                    <div class="task-edit2">
+                                        <%= element.task %> 
+                                        <% if (element.complete) { %>
+                                            <span id='complete'>
+                                                Completed
+                                            </span>
+                                        <% } else { %>
+                                            <span id='incomplete'>
+                                                Incomplete
+                                            </span>
+                                        <% } %>
+                                        <div class="sideBySide">
+                                <!-- Complete Task Button -->
+                                <form action="/prjctr/project/task/complete/<%=currentProject.id%>/  <%=element.id%>?_method=put" method="post">
+                                    <input type="submit" value="Complete" class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide space'>
+                                </form>
+                            <!-- Delete Task Button-->
+                                <form action="/prjctr/project/task/<%=currentProject.id%>/<%=element.id%>?_method=delete" method="post">
+                                    <input type="submit" value="Delete Task"  class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide space' id="taskDeleteButton">
+                                </form>
+                            <!-- Edit Task Button-->
+                                <a href="/prjctr/project/task/<%=currentProject.id%>/<%=element.id%>" class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide space'>Edit Task</a>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                            </div>
+                        </li>
                     </div>
-                </li>
-            <% }) %>
+                <% }) %>
+            </div>
         </ul>
         <% if (edit == false) { %>
             <%- include ('../partials/project/taskForm.ejs') %>

@@ -1,29 +1,31 @@
 <form action="/prjctr/user/<%= actionForm%>" method="post" class="w3-container">
-    <div
-    <% if (create) { %>
-        class="w3-third"
-    <% } else {%>
-        class="w3-half">
-        <% } %>
-        <input type="text" name="userName" class="w3-input w3-border w3-round">
-        <label for="userName" class="form-label">User Name</label>
-    </div>
-    <div 
-    <% if (create) { %>
-        class="w3-third"
-    <% } else {%>
-        class="w3-half">
-        <% } %>
-        <input type="password" name="password" class="w3-input w3-border w3-round">
-        <label for="password" class="form-label">Password</label>    
-    </div>
-    <div class="w3-third">
+    <div class='form'>
+        <div
         <% if (create) { %>
-            <input type="password" name="password2" class="w3-input w3-border w3-round">
-            <label for="password2" class="form-label">Verify Password</label>
-        <% } %>
-    </div> 
-    <div class="center-things">
-        <input type='submit' class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide'>
-    </div>   
+            class="w3-third w3-row-padding">
+        <% } else {%>
+            class="w3-half w3-row-padding">
+            <% } %>
+            <input type="text" name="userName" class="w3-input w3-border w3-round">
+            <label for="userName" class="form-label">User Name</label>
+        </div>
+        <div 
+        <% if (create) { %>
+            class="w3-third w3-row-padding">
+        <% } else {%>
+            class="w3-half w3-row-padding">
+            <% } %>
+            <input type="password" name="password" class="w3-input w3-border w3-round">
+            <label for="password" class="form-label">Password</label>    
+        </div>
+        <div class="w3-third w3-row-padding">
+            <% if (create) { %>
+                <input type="password" name="password2" class="w3-input w3-border w3-round">
+                <label for="password2" class="form-label">Verify Password</label>
+            <% } %>
+        </div> 
+        <div class="center-things">
+            <input type='submit' class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide'>
+        </div>  
+    </div>
 </form>
