@@ -1,15 +1,21 @@
-<nav>
-    <h1>
-        PRJCTR
-    </h1>
+<nav class="nav">
     <div>
-        <a href="/prjctr/user/new">Create User</a>
-        <a href="/prjctr/user/login">Login User</a>
-        <%- include ('../user/logout.ejs') %>
-    </div>
-    <div>
-        <a href="/" class="nav-link">Home</a>
-        <a href="/prjctr/project/" class="nav-link">Project Index</a>
-        <a href="/prjctr/project/new" class="nav-link">New Project</a>
+        <div class="nav-user">
+            <h1 class="title">
+                PRJCTR
+            </h1>
+            <div class="nav-user-link">
+                <a href="/prjctr/user/new" class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide'>Create User</a>
+                <a href="/prjctr/user/login" class='w3-button w3-indigo w3-hover-deep-purple w3-round-large w3-small sideBySide'>Login User</a>
+                <%- include ('../user/logout.ejs') %>
+            </div>
+        </div>
+        <div class="nav-link-group">
+            <div class="nav-link">
+                <a href="/" class="nav-links">Home</a>
+                <a href="/prjctr/project/" class="nav-links">Project Index</a>
+                <a href="/prjctr/project/new" class="nav-links">New Project</a>
+            </div>
+        </div>
     </div>
 </nav>

@@ -4,13 +4,17 @@
     <%- include ('../partials/site/head.ejs') %>
 </head>
 <body>
-    <%- include ('../partials/site/nav.ejs') %>
-    <h1>
-        <%= tabTitle %>
-    </h1>
-    <h3>
-        <%= problem %>
-    </h3>
-    <%- include ('../partials/user/userForm.ejs') %>
+    <div>
+        <%- include ('../partials/site/nav.ejs') %>
+        <div class="center-things">
+            <h1 class="sub-title">
+                <%= tabTitle %>
+            </h1>
+        </div>
+        <h3>
+            <%= problem %>
+        </h3>
+        <%- include ('../partials/user/userForm.ejs') %>
+    </div>
 </body>
 </html>

@@ -1,8 +1,79 @@
+body{
+    display: flex;
+    justify-items: center;
+}
+body>*{
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-top: 5vw;
+}
+.nav {
+    display: flex;
+    width: 90vw;
+}
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:90vw;
+    font-size:20vh;
+    font-weight: bold;
+}
+.nav-user {
+    display: flex;
+    justify-content: flex-end;
+    width: 90vw;
+}
+.nav-user-link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.nav-link-group {
+    display: flex;
+    justify-content: center;
+    width: 90vw;
+    background-color: #590925;
+    color: #D4DCFF;
+}
+.nav-link {
+    display: flex;
+    justify-content:space-between;
+    width: 40vw;
+}
+.nav-links {
+    text-decoration: none;
+    font-size: 30px;
+}
+.nav-links:hover {
+    background-color: #7D83FF
+}
+.project-index{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80vw
+} 
+.center-things {
+    display: flex;
+    justify-content: center;
+    width: 90vw
+}
+.sub-title {
+    font-size: 8vh;
+}
 .sideBySide {
     display : flex;
     margin: 10px;
 }
-
 .space {
     margin-left: 5px;
+}
+#deleteButton {
+    color: #590925 !important;
+    background-color: #1AFFD5 !important;
+}
+#deleteButton:hover {
+    color: #1AFFD5 !important;
+    background-color: #590925 !important;
 }
