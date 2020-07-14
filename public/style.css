@@ -156,6 +156,7 @@ a {
 #card-task {
     display: flex;
     flex-wrap: wrap;
+    width: 90vw
 }
 .space {
     margin-left: 5px;
